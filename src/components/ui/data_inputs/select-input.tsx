@@ -37,7 +37,7 @@ export const SelectInput: React.FC<DropdownProps> = ({ options, onChange }) => {
   };
 
   return (
-    <div ref={dropdownRef} className="relative w-full p-10 bg-white shadow-lg">
+    <div ref={dropdownRef} className="relative w-full p-10 bg-white shadow-2xl">
       <ul className="absolute p-[4px] right-0 left-0 top-0 w-full bg-white border border-gray-300 rounded-md max-h-60 overflow-auto z-10">
         <div className=" border-[1px] rounded-md px-2 border-gray-300 flex justify-center items-center">
           <input

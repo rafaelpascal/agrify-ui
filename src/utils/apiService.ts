@@ -64,3 +64,35 @@ export const createpin = async (data: object) => {
     throw error;
   }
 };
+
+// Create New Product
+export const new_product = async (data: object) => {
+  try {
+    const response = await axios.post(
+      `${StringapiUrl}/api/product/new_product`,
+      data,
+      {
+        headers: {
+          "x-api-key": `${key}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Marchant get products
+export const all_product = async () => {
+  try {
+    const response = await axios.get(`${StringapiUrl}/api/product/allproduct`, {
+      headers: {
+        "x-api-key": `${key}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

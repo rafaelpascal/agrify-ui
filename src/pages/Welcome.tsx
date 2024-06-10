@@ -18,9 +18,11 @@ import CountdownTimer from "../components/ui/displays/CountdownTimer";
 import { CreatedModal } from "../components/ui/modals/CreatedModal";
 import { Accountexist } from "../components/ui/modals/Accountexist";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 
 export const Welcome = () => {
+  const navigate = useNavigate();
   const [isContinue, setIsContinue] = useState(false);
   const [isLocation, setIsLocation] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -45,7 +47,6 @@ export const Welcome = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    location: "",
     phone: "",
     email: "",
   });
@@ -97,12 +98,6 @@ export const Welcome = () => {
     setFocusedInput({ ...focusedInput, [inputName]: false });
   };
 
-  const handleSelectChange = (name: string, value: string) => {
-    const newFormData = { ...formData, [name]: value };
-    setFormData(newFormData);
-    checkFormCompletion(newFormData);
-  };
-
   const handleFormshow = () => {
     setIsContinue(true);
   };
@@ -114,15 +109,27 @@ export const Welcome = () => {
     setIsFormComplete(isComplete);
   };
 
+  const handlenameselect = (selectedOption: any) => {
+    setIsLocation(false);
+    setSelectedOption(selectedOption);
+  };
+
   const handleFormsubmit = async () => {
     try {
-      await register(formData);
+      const data = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        location: isselectedOption.label,
+        phone: formData.phone,
+        email: formData.email,
+      };
+
+      await register(data);
       setEmail(formData.email);
       setIsSubmitted(true);
       setFormData({
         firstName: "",
         lastName: "",
-        location: "",
         phone: "",
         email: "",
       });
@@ -147,8 +154,9 @@ export const Welcome = () => {
         email,
       };
       const verifyres = await verifyacc(data);
-      console.log("Entered OTP:", verifyres);
-      setisOtpsubmitted(true);
+      if (verifyres) {
+        setisOtpsubmitted(true);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -162,6 +170,7 @@ export const Welcome = () => {
       };
       await createpin(data);
       setIsModalOpen(true);
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }
@@ -442,9 +451,7 @@ export const Welcome = () => {
                           <div className="bg-white absolute w-full h-[40px]">
                             <SelectInput
                               options={countryCode}
-                              onChange={(selectedOption: any) =>
-                                setSelectedOption(selectedOption)
-                              }
+                              onChange={handlenameselect}
                             />
                           </div>
                         )}
@@ -523,28 +530,17 @@ export const Welcome = () => {
                           Login
                         </button>
                       </div>
-                      {isFormComplete ? (
-                        <BaseButton
-                          containerCLassName="w-full absolute bottom-0 right-0 left-0 font-semibold bg-themeGreen rounded-[4px] font-DMSans h-[50px]  sm:h-[46px] text-[#fff] [@media(max-width:800px)]:p-3"
-                          hoverScale={1.01}
-                          hoverOpacity={0.8}
-                          tapScale={0.9}
-                          onClick={handleFormsubmit}
-                        >
-                          <span>proceed</span>
-                        </BaseButton>
-                      ) : (
-                        <BaseButton
-                          containerCLassName="w-full absolute disabled bottom-0 right-0 left-0 font-semibold bg-themeGrey rounded-[4px] font-DMSans h-[50px]  sm:h-[46px] text-[#fff] [@media(max-width:800px)]:p-3"
-                          hoverScale={1.01}
-                          hoverOpacity={0.8}
-                          tapScale={0.9}
-                          onClick={handleFormsubmit}
-                          disabled={!isFormComplete}
-                        >
-                          <span>proceed</span>
-                        </BaseButton>
-                      )}
+
+                      <BaseButton
+                        containerCLassName="w-full absolute disabled bottom-0 right-0 left-0 font-semibold bg-themeGreen rounded-[4px] font-DMSans h-[50px]  sm:h-[46px] text-[#fff] [@media(max-width:800px)]:p-3"
+                        hoverScale={1.01}
+                        hoverOpacity={0.8}
+                        tapScale={0.9}
+                        onClick={handleFormsubmit}
+                        disabled={!isFormComplete}
+                      >
+                        <span>proceed</span>
+                      </BaseButton>
                     </div>
                   </div>
                 </motion.div>

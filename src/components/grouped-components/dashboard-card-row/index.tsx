@@ -1,32 +1,16 @@
-import { useState } from "react";
 import {
   DashboardCard,
   DashboardCardProps,
 } from "../../../components/ui/dashboard-card";
 import { cn } from "../../../utils/helpers";
-import { stock, sales, product } from "../../../assets";
 
-export const DashboardCardRow = () => {
-  const [dashboardHeroCards, setDashboardHeroCards] = useState<
-    DashboardCardProps[]
-  >([
-    {
-      icon: product,
-      title: "Total Product",
-      value: 2000,
-    },
-    {
-      icon: sales,
-      title: "Total Sales",
-      value: 3000,
-    },
-    {
-      icon: stock,
-      title: "Stock Left",
-      value: 4000,
-    },
-  ]);
+interface DashboardCardRowProps {
+  dashboardHeroCards: DashboardCardProps[];
+}
 
+export const DashboardCardRow: React.FC<DashboardCardRowProps> = ({
+  dashboardHeroCards,
+}) => {
   return (
     <div className={cn("relative w-full")}>
       <div

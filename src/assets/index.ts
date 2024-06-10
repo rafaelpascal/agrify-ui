@@ -6,6 +6,7 @@ import agrifymodal from "./icons/agrifymodal.svg";
 import stock from "./icons/stock.svg";
 import sales from "./icons/sales.svg";
 import product from "./icons/product.svg";
+import productCreated from "./icons/created.svg";
 
 export {
   agrify,
@@ -16,4 +17,5 @@ export {
   stock,
   sales,
   product,
+  productCreated,
 };
