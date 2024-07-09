@@ -4,7 +4,7 @@ import { sidebarData } from "../sidebar/data";
 
 export const MobileNav = () => {
   return (
-    <div className={cn("fixed bottom-0 w-full bg-white")}>
+    <div className={cn("fixed bottom-0 w-full sm:hidden")}>
       <div className="flex justify-between gap-4 overflow-x-auto border-t border-primary/10">
         {sidebarData.map((opt) => (
           <SideNav

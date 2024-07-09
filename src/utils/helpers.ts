@@ -28,3 +28,23 @@ export const createAvatarUrl = (args: CreateAvatarUrlArgs) => {
 
   return `https://ui-avatars.com/api.jpg?${params.toString()}`;
 };
+
+export function statusColorCode(statusText: string): BadgeStatus {
+  const positives = [
+    "completed",
+    "verified",
+    "successful",
+    "approved",
+    "active",
+  ];
+  const negatives = ["reject", "late", "archieved"];
+  const cautions = ["not verified", "not active", "pending"];
+  const others = ["permanent"];
+
+  const text = statusText.toLowerCase();
+  if (positives.includes(text)) return "positive";
+  else if (negatives.includes(text)) return "negative";
+  else if (cautions.includes(text)) return "caution";
+  else if (others.includes(text)) return "perma";
+  else return "neutral";
+}

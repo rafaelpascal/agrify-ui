@@ -9,7 +9,7 @@ export const DashboardArea = (props: DashboardAreaProps) => {
   const { children, title } = props;
 
   return (
-    <main className="fixed flex w-full h-[90vh] flex-col gap-y-4 overflow-y-hidden py-4 sm:relative sm:overflow-y-auto">
+    <main className="fixed flex w-full h-[100vh] flex-col gap-y-4 overflow-y-hidden py-4 sm:relative sm:overflow-y-auto">
       <div className="px-5">
         <TopNav title={title} />
       </div>

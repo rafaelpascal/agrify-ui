@@ -2,7 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AppLayout } from "../components/ui/layout/AppLayout";
 import { Login } from "../pages/Login.js";
 import { Welcome } from "../pages/Welcome.js";
-import { Home } from "../pages/Home.js";
+import Home from "../pages/Home.js";
+import Users from "../pages/Users.js";
+import Account from "../pages/Account.js";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <Home />,
+      },
+      {
+        path: "users",
+        element: <Users />,
+      },
+      {
+        path: "account",
+        element: <Account />,
       },
     ],
   },

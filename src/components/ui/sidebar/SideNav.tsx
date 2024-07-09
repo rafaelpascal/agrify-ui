@@ -19,10 +19,8 @@ export const SideNav = (props: SideNavProps) => {
 
   const style = ({ isActive }: ActiveClass) => {
     const baseStyles = cn(
-      "relative flex flex-col items-center p-4",
-      isActive && "bg-main/5 font-medium text-themeGreen",
-      isActive &&
-        "before:absolute before:left-0 before:h-full before:w-[3px] before:rounded-md before:bg-main"
+      "relative flex flex-row items-center gap-4 p-3 bg-themeWhite",
+      isActive && "font-[] rounded-[8px] bg-themeGreen/5 text-themeGreen"
     );
 
     if (typeof className === "string") return cn(baseStyles, className);
@@ -32,8 +30,10 @@ export const SideNav = (props: SideNavProps) => {
 
   return (
     <NavLink to={href} className={style}>
-      <Icon width={24} height={24} className={cn("")} />
-      <span className="text-[12px] font-bold font-DMSans">{text}</span>
+      <Icon width={24} height={24} className={cn("bg-transparent")} />
+      <span className="text-[12px] bg-transparent font-bold font-DMSans">
+        {text}
+      </span>
     </NavLink>
   );
 };

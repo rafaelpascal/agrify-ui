@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { cn } from "../../../utils/helpers";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Sidebar } from "../sidebar/Sidebar";
+
 import { MobileNav } from "./MobileNav";
 
 export const AppLayout = () => {
@@ -20,6 +22,7 @@ export const AppLayout = () => {
       )}
     >
       <div className="flex max-sm:min-h-screen max-sm:pb-20">
+        <Sidebar />
         <Outlet />
       </div>
       <MobileNav />

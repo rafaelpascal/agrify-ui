@@ -7,7 +7,7 @@ export interface TopNavProps {
 
 export const TopNav = ({ title }: TopNavProps) => {
   return (
-    <header className="flex w-full justify-between pt-4 max-md:items-start">
+    <header className="flex w-full justify-between items-center max-md:items-start">
       <div>
         <Heading level={6} className="text-[20px] font-bold md:text-[20px]">
           {title}

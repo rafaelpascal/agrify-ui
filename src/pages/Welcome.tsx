@@ -13,16 +13,13 @@ import { PINinput } from "../components/ui/data_inputs/pin-input";
 import { RiRoadMapLine } from "react-icons/ri";
 import { TbPhoneCall } from "react-icons/tb";
 import { MdOutlineEmail } from "react-icons/md";
-import { register, verifyacc, createpin } from "../utils/apiService";
 import CountdownTimer from "../components/ui/displays/CountdownTimer";
 import { CreatedModal } from "../components/ui/modals/CreatedModal";
 import { Accountexist } from "../components/ui/modals/Accountexist";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 
 export const Welcome = () => {
-  const navigate = useNavigate();
   const [isContinue, setIsContinue] = useState(false);
   const [isLocation, setIsLocation] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -30,20 +27,17 @@ export const Welcome = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExistModalOpen, setIsExistModalOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [isFormComplete, setIsFormComplete] = useState(false);
   const [isloaded, setIsloaded] = useState(true);
   const [otp, setOtp] = useState("");
   const [isselectedOption, setSelectedOption] = useState({
     value: "",
     label: "",
   });
-  const [email, setEmail] = useState("");
   const [pin, setPin] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
   const [isTimedOut, setIsTimedOut] = useState<boolean>(false);
   const { i18n } = useTranslation();
   const { t } = useTranslation();
-  // const [isFocused, setIsFocused] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -62,7 +56,6 @@ export const Welcome = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormData = { ...formData, [e.target.name]: e.target.value };
     setFormData(newFormData);
-    checkFormCompletion(newFormData);
   };
 
   const changeLanguage = (lng: string) => {
@@ -102,13 +95,6 @@ export const Welcome = () => {
     setIsContinue(true);
   };
 
-  const checkFormCompletion = (data: typeof formData) => {
-    const isComplete = Object.values(data).every(
-      (value) => value.trim() !== ""
-    );
-    setIsFormComplete(isComplete);
-  };
-
   const handlenameselect = (selectedOption: any) => {
     setIsLocation(false);
     setSelectedOption(selectedOption);
@@ -116,23 +102,7 @@ export const Welcome = () => {
 
   const handleFormsubmit = async () => {
     try {
-      const data = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        location: isselectedOption.label,
-        phone: formData.phone,
-        email: formData.email,
-      };
-
-      await register(data);
-      setEmail(formData.email);
       setIsSubmitted(true);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: "",
-      });
     } catch (error: any) {
       setMessage(error.response.data.message);
       setIsExistModalOpen(true);
@@ -148,29 +118,12 @@ export const Welcome = () => {
   };
 
   const handleSubmit = async () => {
-    try {
-      const data = {
-        otp,
-        email,
-      };
-      const verifyres = await verifyacc(data);
-      if (verifyres) {
-        setisOtpsubmitted(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    setisOtpsubmitted(true);
   };
 
   const handlePinSubmit = async () => {
     try {
-      const data = {
-        pin,
-        email,
-      };
-      await createpin(data);
       setIsModalOpen(true);
-      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }
@@ -537,7 +490,6 @@ export const Welcome = () => {
                         hoverOpacity={0.8}
                         tapScale={0.9}
                         onClick={handleFormsubmit}
-                        disabled={!isFormComplete}
                       >
                         <span>proceed</span>
                       </BaseButton>
