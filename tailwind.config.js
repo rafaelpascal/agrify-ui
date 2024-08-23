@@ -1,4 +1,4 @@
-import { themeColors } from "../frontend/src/styles/theme/colors";
+import { themeColors } from "./src/styles/theme/colors.ts";
 
 /** @type {import('tailwindcss').Config} */
 export default {
