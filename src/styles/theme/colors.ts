@@ -38,7 +38,7 @@ export const themeColors = {
   theme: "rgb(var(--admin-color-theme)/ <alpha-value>)",
   themeText: "rgb(var(--admin-color-text)/ <alpha-value>)",
   themeGrey: "#A2A1A8",
-  themeGreen: "#7B57D8",
+  themeGreen: "#00A45F",
   themeWhite: "#fff",
   themeDanger: "#F45B69",
 

@@ -76,7 +76,7 @@ export const BaseTable = ({
     } else {
       if (row.isStatus === true && row.statusText) {
         return (
-          <div className="bg-[#415BE6]/10 text-[#415BE6]  flex justify-center items-center w-[70px] rounded-[4px] px-[10px] py-1">
+          <div className="bg-themeGreen/10 text-themeGreen  flex justify-center items-center w-[70px] rounded-[4px] px-[10px] py-1">
             {row.statusText}
           </div>
         );

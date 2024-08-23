@@ -188,7 +188,7 @@ function Account() {
                 <span className="bg-themeWhite  py-1 text-[12px] font-semibold ml-1 font-DMSans text-[#435060]">
                   Suleja, Niger
                 </span>
-                <span className="bg-[#415BE6]/10 px-2 rounded-[4px] text-[#415BE6]  py-1 text-[12px] font-semibold ml-1 font-DMSans">
+                <span className="bg-themeGreen/10 text-themeGreen px-2 rounded-[4px] py-1 text-[12px] font-semibold ml-1 font-DMSans">
                   In Stock
                 </span>
               </div>
