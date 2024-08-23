@@ -1,9 +1,31 @@
-import { backIcon, farmer, money, copy } from "../assets";
+import { backIcon, farmer, money, copy, cassava, potato } from "../assets";
 import { DashboardArea } from "../components/ui/layout/dashboard/DashboardArea";
 import UserCards from "../components/ui/layout/cards/UserCards";
+import { BaseTable } from "../components/table/BaseTable";
+
 import { useState } from "react";
 
+const transactionTableHeaders = [
+  "Product Detail",
+  "Category",
+  "Price per unit",
+  "Stock Price",
+  "Qty Added ",
+  "Qty Left",
+  "Status",
+  "Action",
+];
+
+interface IBaseTable {
+  showPagination?: boolean;
+  headers: string[];
+  headersClassName?: string;
+  tableRows: (string | Record<string, string | boolean | undefined>)[][];
+}
+
 function Account() {
+  const [filteredTableRows] = useState<IBaseTable["tableRows"]>([]);
+  const [searchQuery] = useState("");
   const [items] = useState([
     {
       Icon: money,
@@ -25,6 +47,93 @@ function Account() {
       title: "Total Product",
       value: 2000,
     },
+  ]);
+  const [transactionsMockTableRows] = useState([
+    [
+      {
+        hascheck: true,
+        haspicture: true,
+        img: cassava,
+        name: "Cassava",
+      },
+      "Tuber",
+      "₦ 900",
+      "₦122,900",
+      "2500 pcs",
+      "500 pcs ",
+      { isStatus: true, statusText: "In Stock" },
+      { action: true, userId: "dhjduyweywueweiwewe8we92" },
+    ],
+    [
+      { hascheck: true, haspicture: true, img: cassava, name: "Cassava" },
+      "Tuber",
+      "₦ 900",
+      "₦122,900",
+      "2500 pcs",
+      "500 pcs ",
+      { isStatus: false, statusText: "Out of Stock" },
+      { action: true, userId: "dhjduyweywueweiwewe8we92" },
+    ],
+    [
+      { hascheck: true, haspicture: true, img: potato, name: "Sweet Potatoes" },
+      "Tuber",
+      "₦ 900",
+      "₦122,900",
+      "2500 pcs",
+      "500 pcs",
+      { isStatus: true, statusText: "In Stock" },
+      { action: true, userId: "dhjduyweywueweiwewe8we92" },
+    ],
+    [
+      {
+        hascheck: true,
+        haspicture: true,
+        img: cassava,
+        name: "Irish Potatoes",
+      },
+      "Tuber",
+      "₦ 900",
+      "₦122,900",
+      "2500 pcs",
+      "500 pcs",
+      { isStatus: false, statusText: "Out of Stock" },
+      { action: true, userId: "dhjduyweywueweiwewe8we92" },
+    ],
+    [
+      { hascheck: true, haspicture: true, img: potato, name: "Irish Potatoes" },
+      "Tuber",
+      "₦ 900",
+      "₦122,900",
+      "2500 pcs",
+      "500 pcs ",
+      { isStatus: true, statusText: "In Stock" },
+      { action: true, userId: "dhjduyweywueweiwewe8we92" },
+    ],
+    [
+      {
+        hascheck: true,
+        haspicture: true,
+        img: cassava,
+        name: "Irish Potatoes",
+      },
+      "Tuber",
+      "₦ 900",
+      "₦122,900",
+      "2500 pcs",
+      "500 pcs",
+      { isStatus: false, statusText: "Out of Stock" },
+      { action: true, userId: "dhjduyweywueweiwewe8we92" },
+    ],
+    [
+      { hascheck: true, haspicture: true, img: potato, name: "Irish Potatoes" },
+      "Tuber",
+      "₦ 900",
+      "₦122,900",
+      "2500 pcs",
+      "500 pcs ",
+      { isStatus: true, statusText: "In Stock" },
+      { action: true, userId: "dhjduyweywueweiwewe8we92" },
+    ],
   ]);
 
   return (
@@ -80,7 +189,7 @@ function Account() {
                   Suleja, Niger
                 </span>
                 <span className="bg-[#415BE6]/10 px-2 rounded-[4px] text-[#415BE6]  py-1 text-[12px] font-semibold ml-1 font-DMSans">
-                  Active
+                  In Stock
                 </span>
               </div>
             </div>
@@ -133,6 +242,15 @@ function Account() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="pt-4 rounded-lg">
+        <BaseTable
+          tableRows={
+            searchQuery ? filteredTableRows : transactionsMockTableRows
+          }
+          headers={transactionTableHeaders}
+          showPagination={true}
+        />
       </div>
     </DashboardArea>
   );

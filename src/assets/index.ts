@@ -12,6 +12,8 @@ import backIcon from "./icons/backicon.svg";
 import farmer from "./images/farmer.svg";
 import money from "./icons/moneys.svg";
 import copy from "./icons/document-copy.svg";
+import cassava from "./images/cassava.svg";
+import potato from "./images/potato.svg";
 
 export {
   agrify,
@@ -28,4 +30,6 @@ export {
   farmer,
   money,
   copy,
+  cassava,
+  potato,
 };

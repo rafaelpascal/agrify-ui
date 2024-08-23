@@ -45,12 +45,12 @@ export const BaseModal = ({ children, isOpen, closeModal }: IBaseModal) => {
           animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -20 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.3 }}
-          className="fixed shadow-lg bottom-0 left-0 right-0 top-0 z-[9999] flex h-full min-h-screen w-full items-center justify-center overflow-y-auto"
+          className="fixed shadow-lg bottom-0 left-0 right-0 top-0 z-[9999] bg-[#000] bg-opacity-60 flex h-full min-h-screen w-full items-center justify-center overflow-y-auto"
         >
           <div
             ref={tooltipRef as React.RefObject<HTMLDivElement>}
             className={cn(
-              "mb-32 h-auto bg-transparent max-h-[540px] w-[26%] overflow-y-auto rounded-[20px] px-4 shadow-md [@media(max-width:1200px)]:w-[50%] [@media(max-width:700px)]:w-[90%] "
+              "h-auto max-h-[800px] w-[26%] overflow-y-auto bg-[#fff] rounded-[20px] shadow-md [@media(max-width:1200px)]:w-[50%] [@media(max-width:700px)]:w-[90%] "
             )}
           >
             {children}

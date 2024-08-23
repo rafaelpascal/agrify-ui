@@ -136,12 +136,12 @@ const Home = () => {
   ]);
   const [transactionsMockTableRows] = useState([
     [
-      { hasAvatar: false, statusText: "", img: "", name: "Maize" },
-      "Grains",
-      "₦12,900",
-      "30 Mar, 2024",
-      "Buhari ",
-      "5 bags",
+      { hasAvatar: false, statusText: "", img: "", name: "Yam" },
+      "Cerels",
+      "₦12,2200",
+      "31 Mar, 2024",
+      "Buha",
+      "10 bags",
       { isStatus: true, statusText: "In stock" },
     ],
     [
@@ -149,7 +149,7 @@ const Home = () => {
       "Grains",
       "₦12,900",
       "30 Mar, 2024",
-      "Buhari ",
+      "Buhari",
       "5 bags",
       { isStatus: false, statusText: "No stock" },
     ],

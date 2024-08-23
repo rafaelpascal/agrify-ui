@@ -26,6 +26,6 @@
       "~ui/*": ["./src/components/ui/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "**/*.test.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

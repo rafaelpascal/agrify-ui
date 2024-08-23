@@ -5,6 +5,8 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import Checkbox from "../ui/data_inputs/check-box";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Avatar } from "../ui/avatar";
+import { MarchantEditModal } from "../ui/modals/MarchantEditModal";
 
 interface IBaseTable {
   showPagination?: boolean;
@@ -13,6 +15,10 @@ interface IBaseTable {
   tableRows: (string | Record<string, string | boolean | undefined>)[][];
 }
 
+interface ProductView {
+  id: string | boolean | undefined;
+  status: boolean;
+}
 export const BaseTable = ({
   // showPagination = false,
   headers,
@@ -21,7 +27,11 @@ export const BaseTable = ({
 }: IBaseTable) => {
   const [itemsPerPage] = useState(10);
   const navigate = useNavigate();
-  const [Isactionmodal, setIsactionmodal] = useState<number | null>(0);
+  const [Isactionmodal, setIsactionmodal] = useState<number | boolean>(false);
+  const [isEditProduct, setIsEditProduct] = useState<ProductView>({
+    id: "",
+    status: false,
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -45,12 +55,18 @@ export const BaseTable = ({
     setCheckedRows(newCheckedRows);
     setIsHeaderChecked(newCheckedRows.every((item) => item));
   };
-
   const handleOpenaccount = (userId: string | boolean | undefined) => {
     console.log(userId);
-    navigate("/account");
+    setIsactionmodal(false);
+    navigate("/users/account");
   };
 
+  const handleclose = () => {
+    setIsEditProduct({
+      id: "",
+      status: false,
+    });
+  };
   function handleTableRowAppend(
     row: string | Record<string, string | boolean | undefined>,
     rowIndex: number
@@ -66,7 +82,7 @@ export const BaseTable = ({
         );
       } else if (row.isStatus === false && row.statusText) {
         return (
-          <div className="bg-[#CD266C]/10 text-[#CD266C] flex justify-center items-center w-[70px] rounded-[4px] px-[10px] py-1">
+          <div className="bg-[#CD266C]/10 text-[#CD266C] flex justify-center items-center w-[90px] rounded-[4px] px-[10px] py-1">
             {row.statusText}
           </div>
         );
@@ -75,7 +91,7 @@ export const BaseTable = ({
           <div className="relative bg-white">
             <button
               onClick={() =>
-                setIsactionmodal(Isactionmodal === rowIndex ? null : rowIndex)
+                setIsactionmodal(Isactionmodal === rowIndex ? false : rowIndex)
               }
               className="bg-white flex justify-center items-center"
             >
@@ -98,7 +114,15 @@ export const BaseTable = ({
                 >
                   View
                 </button>
-                <button className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]">
+                <button
+                  className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]"
+                  onClick={() =>
+                    setIsEditProduct({
+                      id: row.userId,
+                      status: true,
+                    })
+                  }
+                >
                   Edit
                 </button>
                 <button className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]">
@@ -108,7 +132,31 @@ export const BaseTable = ({
             )}
           </div>
         );
-      } else if (row.hascheck === true) {
+      } else if (row.hascheck === true && row.haspicture === true) {
+        return (
+          <div className="flex justify-start gap-2 w-[50%] bg-white items-center">
+            <Checkbox
+              label="Name"
+              bgClass="bg-white"
+              initialChecked={checkedRows[rowIndex]}
+              onChange={(checked) => handleRowCheckboxChange(rowIndex, checked)}
+            />
+            <Avatar
+              img={row?.img?.toString() || ""}
+              name={row.name!.toString()}
+              avatarClassName="h-10 w-14"
+              textClassName="none hidden"
+              avatarTextContainerClassName="w-full"
+              wrapperClassName="bg-white"
+              rounded={false}
+            >
+              <p className="text-[12px] font-DMSans font-bold text-[#435060] w-[100%]/2 bg-white">
+                {row.name!.toString()}
+              </p>
+            </Avatar>
+          </div>
+        );
+      } else if (row.hascheck === true && row.haspicture === false) {
         return (
           <Checkbox
             label="Name"
@@ -116,14 +164,14 @@ export const BaseTable = ({
             initialChecked={checkedRows[rowIndex]}
             onChange={(checked) => handleRowCheckboxChange(rowIndex, checked)}
           >
-            <p className="text-[12px] font-DMSans font-normal text-[#435060] w-full bg-white">
+            <p className="text-[12px] font-DMSans font-bold text-[#435060] w-full bg-white">
               {row.name!.toString()}
             </p>
           </Checkbox>
         );
       } else if (row.hascheck === false) {
         return (
-          <p className="text-[12px] font-DMSans font-normal text-[#435060] w-full bg-white">
+          <p className="text-[12px] font-DMSans font-bold text-[#435060] w-full bg-white">
             {row.name!.toString()}
           </p>
         );
@@ -145,21 +193,23 @@ export const BaseTable = ({
               {headers.map((headr: string, idx: number) => (
                 <th
                   key={idx}
-                  className="bg-[#F5F6FB] text-[12px] text-[#435060] font-bold font-DMSans"
+                  className="bg-[#E6E8EF] text-[12px] w-[13%] text-[#435060] font-bold font-DMSans"
                 >
-                  {headr === "Name" ? (
+                  {headr === "Name" || headr === "Product Detail" ? (
                     <Checkbox
                       label=""
-                      bgClass=""
+                      bgClass="bg-[#E6E8EF]"
                       initialChecked={isHeaderChecked}
                       onChange={handleHeaderCheckboxChange}
                     >
-                      <p className="bg-[#F5F6FB] text-[12px] font-DMSans font-bold text-[#435060]">
+                      <p className="bg-[#E6E8EF] w-full text-[12px] font-DMSans font-bold text-[#435060]">
                         {headr}
                       </p>
                     </Checkbox>
                   ) : (
-                    headr
+                    <p className="bg-[#E6E8EF] w-full text-[12px] font-DMSans font-bold text-[#435060]">
+                      {headr}
+                    </p>
                   )}
                 </th>
               ))}
@@ -173,7 +223,7 @@ export const BaseTable = ({
               ) => (
                 <tr
                   key={idx}
-                  className="border-b bg-white border-b-themeGrey/20 "
+                  className="border-b rounded-md mb-3 bg-white border-b-themeGrey/20 "
                 >
                   {row.map((item, _i) => (
                     <td
@@ -208,6 +258,11 @@ export const BaseTable = ({
           </button>
         </div>
       </div>
+      <MarchantEditModal
+        userId={isEditProduct.id}
+        isOpen={isEditProduct.status}
+        closeModal={handleclose}
+      />
     </div>
   );
 };

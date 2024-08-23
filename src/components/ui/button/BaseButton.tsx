@@ -15,8 +15,6 @@ export const BaseButton = ({
   children,
   containerCLassName,
   onClick,
-  hoverScale = 1.1,
-  hoverOpacity = 0.9,
   tapScale = 0.8,
   disabled = false,
 }: BaseButtonProps) => {
@@ -27,11 +25,6 @@ export const BaseButton = ({
   };
   return (
     <motion.div
-      whileHover={{
-        scale: hoverScale,
-        opacity: hoverOpacity,
-        transition: { duration: 0.1 },
-      }}
       whileTap={{ scale: tapScale, borderRadius: "15px" }}
       className={cn(
         "flex h-[45px] cursor-pointer select-none items-center justify-center p-[10px]  text-center text-themeText",

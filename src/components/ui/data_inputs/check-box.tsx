@@ -32,7 +32,7 @@ const Checkbox: React.FC<CheckInputProps> = ({
 
   return (
     <label
-      className={`flex flex-row justify-start items-center gap-2 ${bgClass}`}
+      className={`flex flex-row justify-start items-center gap-2 focus:outline-none ${bgClass}`}
     >
       <input
         type="checkbox"
