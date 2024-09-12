@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { DashboardArea } from "../components/ui/layout/dashboard/DashboardArea";
-import { motion } from "framer-motion";
 import { ProductsTable } from "../components/table/ProductsTable";
 import { cassava } from "../assets";
+import { TiPlus } from "react-icons/ti";
+import { ArrowDropDown, Search } from "react-huge-icons/outline";
+import { RiDropdownList } from "react-icons/ri";
+import { BsDownload } from "react-icons/bs";
 
 const transactionTableHeaders = [
   "Product Detail",
@@ -25,8 +28,6 @@ interface IBaseTable {
 const Products = () => {
   const [searchQuery] = useState("");
   const [filteredTableRows] = useState<IBaseTable["tableRows"]>([]);
-  const [marchant] = useState("140");
-  const [shoppera] = useState("2000");
   const [transactionsMockTableRows] = useState([
     [
       { hascheck: true, img: cassava, haspicture: true, name: "Cassava" },
@@ -79,112 +80,56 @@ const Products = () => {
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
   ]);
-  const [shoppersMockTableRows] = useState([
-    [
-      { hascheck: true, haspicture: false, name: "Musa Ahmed" },
-      "Musaa1@email.com",
-      "08164113471",
-      "40 Mar, 2024",
-      "Benue ",
-      { isStatus: true, statusText: "Active" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrann Moha" },
-      "",
-      "08164123471",
-      "41 Mar, 2024",
-      "Abuja ",
-      { isStatus: false, statusText: "Inactive" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imramn Moha" },
-      "Musaa2@email.com",
-      "08164133471",
-      "42 Mar, 2024",
-      "Kano ",
-      { isStatus: true, statusText: "Active" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrban Moha" },
-      "",
-      "08164143471",
-      "43 Mar, 2024",
-      "Anambra State",
-      { isStatus: false, statusText: "Inactive" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-  ]);
   const [isMarchantTable, setIsMarchantTable] = useState(true);
-  const [isShoppersTable, setIsShoppersTable] = useState(false);
 
   const handleShowMarchant = () => {
     setIsMarchantTable(true);
-    setIsShoppersTable(false);
-  };
-
-  const handleShowShoppers = () => {
-    setIsShoppersTable(true);
-    setIsMarchantTable(false);
   };
 
   return (
     <DashboardArea title={`Raphael`}>
-      <h2 className="mb-4">Users</h2>
-      <div className="h-auto bg-white p-3 rounded-[12px]">
-        <div className="rounded-[12px] mb-3 w-full lg:w-[25%] h-[39px] flex gap-2 flex-row justify-between items-center px-3 py-1">
-          <button
-            onClick={handleShowMarchant}
-            className={`text-[14px] h-[28px] font-semibold font-DMSans w-[50%] rounded-[8px] relative overflow-hidden ${
-              isMarchantTable ? "text-[#435060]" : "text-[#AFAEBC]"
-            }`}
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isMarchantTable ? 1 : 0 }}
-              transition={{ duration: 1 }} // duration in seconds
-              className={`absolute inset-0 ${
-                isMarchantTable ? "bg-white" : "bg-transparent"
-              }`}
+      <h2 className="text-[14px] px-4 mb-4 font-semibold font-DMSans text-[#8F94A8]">
+        Products
+      </h2>
+      <div className="rounded-[12px] mb-3 w-full flex gap-2 flex-row justify-between items-center px-3 py-1">
+        <button
+          onClick={handleShowMarchant}
+          className={`text-[14px] h-[39px] w-[145px] bg-[#00A45F] font-semibold font-DMSans rounded-[8px] relative overflow-hidden ${
+            isMarchantTable ? "text-[#435060]" : "text-[#AFAEBC]"
+          }`}
+        >
+          <span className="relative flex justify-between items-center px-3 bg-inherit">
+            <TiPlus className="bg-transparent text-[#fff]" />
+            <p className="bg-transparent text-[#fff] text-[12px]">
+              Add New Product
+            </p>
+          </span>
+        </button>
+        <div className="flex justify-between items-center">
+          <div className="bg-white w-full px-2 flex justify-between items-center lg:w-[206px] h-[39px] rounded-[8px] border-[1px] border-[#E6E6E8]">
+            <Search className="bg-white mr-3 text-[#000] text-[20px]" />
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="Search"
+              className="w-full h-auto text-[#000] text-[13px] placeholder:text-[#000] font-semibold bg-white outline-none "
             />
-            <span className="relative z-10 bg-inherit">
-              Merchants ({marchant})
-            </span>
-          </button>
-
-          <button
-            onClick={handleShowShoppers}
-            className={`text-[14px] h-[28px] font-semibold font-DMSans w-[50%] rounded-[8px] relative overflow-hidden ${
-              isShoppersTable ? "text-[#435060]" : "text-[#AFAEBC]"
-            }`}
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isShoppersTable ? 1 : 0 }}
-              transition={{ duration: 1 }} // duration in seconds
-              className={`absolute inset-0 ${
-                isShoppersTable ? "bg-white" : "bg-transparent"
-              }`}
-            />
-            <span className="relative z-10 bg-inherit">
-              Shoppers ({shoppera})
-            </span>
-          </button>
+          </div>
+          <div className="bg-white w-full px-2 flex justify-center items-center lg:w-[112px] ml-4 h-[39px] rounded-[8px] border-[1px] border-[#E6E6E8]">
+            <button className="text-[#000] text-[13px] ml-2 font-semibold">
+              Sort by
+            </button>
+            <ArrowDropDown className="bg-white text-[#000] mr-3 text-[20px]" />
+          </div>
         </div>
+      </div>
+      <div className="h-auto bg-white p-3 rounded-[12px]">
         {isMarchantTable && (
           <ProductsTable
             tableRows={
               searchQuery ? filteredTableRows : transactionsMockTableRows
             }
-            headers={transactionTableHeaders}
-            showPagination={true}
-          />
-        )}
-        {isShoppersTable && (
-          <ProductsTable
-            tableRows={searchQuery ? filteredTableRows : shoppersMockTableRows}
             headers={transactionTableHeaders}
             showPagination={true}
           />
