@@ -150,10 +150,10 @@ function Account() {
           </p>
         </button>
       </div>
-      <div className="w-full mt-6 flex flex-row justify-between items-center">
-        <div className="w-[40%] py-[27px] px-[22px] border-[1px] border-[#E6E8EF] bg-themeWhite h-[219px] rounded-[12px] flex justify-between items-center ">
+      <div className="w-full mt-6 flex flex-col lg:flex-row justify-between items-center">
+        <div className="w-full lg:w-[40%] py-[27px] px-[22px] border-[1px] border-[#E6E8EF] bg-themeWhite h-full lg:h-[219px] rounded-[12px] flex flex-col lg:flex-row justify-between items-center ">
           <img src={farmer} />
-          <div className="bg-themeWhite flex flex-col justify-start items-start h-full ml-3">
+          <div className="bg-themeWhite w-full p-2 lg:p-0 mt-2 lg:mt-0 rounded-lg flex flex-col justify-start items-start h-full ml-3">
             <h1 className="bg-themeWhite text-[24px] font-bold font-DMSans #435060">
               Mohammed Musa
             </h1>
@@ -195,8 +195,8 @@ function Account() {
             </div>
           </div>
         </div>
-        <div className="w-[55%] h-[219px]">
-          <div className="flex flex-row justify-between items-start">
+        <div className="w-full mt-4 lg:mt-0 lg:w-[55%] h-[219px]">
+          <div className="flex overflow-x-auto gap-1 flex-row justify-between items-start">
             {items.map((item) => (
               <UserCards
                 Icon={item.Icon}

@@ -172,7 +172,7 @@ const Users = () => {
     <DashboardArea title={`Welcome Raphael`}>
       <h2 className="mb-4">Users</h2>
       <div className="h-auto bg-white p-3 rounded-[12px]">
-        <div className="rounded-[12px] mb-3 w-[25%] h-[39px] flex gap-2 flex-row justify-between items-center px-3 py-1">
+        <div className="rounded-[12px] mb-3 w-full lg:w-[25%] h-[39px] flex gap-2 flex-row justify-between items-center px-3 py-1">
           <button
             onClick={handleShowMarchant}
             className={`text-[14px] h-[28px] font-semibold font-DMSans w-[50%] rounded-[8px] relative overflow-hidden ${

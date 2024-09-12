@@ -23,7 +23,7 @@ export const DashboardCardRow: React.FC<DashboardCardRowProps> = ({
             key={n.title}
             {...n}
             childrenClassName="text-themeGrey bg-white px-4 text-sm"
-            className="flex-1 max-sm:min-w-[110px] h-auto bg-inherit"
+            className="flex-1 max-sm:min-w-[180px] h-auto bg-inherit"
           />
         ))}
       </div>

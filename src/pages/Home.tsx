@@ -168,8 +168,8 @@ const Home = () => {
           <DoughnutChartDemo />
         </div>
       </div>
-      <div className="flex justify-between items-center">
-        <div className="bg-white p-4 w-[59%] h-[331px] rounded-lg">
+      <div className="flex lg:flex-row flex-col justify-between items-center">
+        <div className="bg-white p-4 w-full mb-4 lg:mb-0 lg:w-[59%] h-[331px] rounded-lg">
           <div className="bg-white flex mb-5 flex-row justify-between items-center">
             <div className="bg-white">
               <h2 className="bg-white text-[14px] text-[#343434] font-bold font-DMSans">
@@ -191,7 +191,7 @@ const Home = () => {
             showPagination={true}
           />
         </div>
-        <div className="bg-white w-[40%] h-[331px] p-4 rounded-lg">
+        <div className="bg-white w-full lg:w-[40%] h-[331px] p-4 rounded-lg">
           <div className="bg-white flex mb-5 flex-row justify-between items-center">
             <div className="bg-white">
               <h2 className="bg-white text-[14px] text-[#343434] font-bold font-DMSans">

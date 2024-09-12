@@ -13,7 +13,7 @@ export const DashboardArea = (props: DashboardAreaProps) => {
       <div className="px-5">
         <TopNav title={title} />
       </div>
-      <div className="max-h-[calc(100vh-120px)] h-[90vh] overflow-y-auto overflow-x-hidden px-5">
+      <div className="max-h-[calc(100vh-120px)] h-[90vh] overflow-y-auto overflow-x-hidden px-2 pb-[2rem]">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -18,7 +18,7 @@ export const BaseItem = (props: DashboardCardProps) => {
   // });
 
   return (
-    <div className="w-full border-[2px] flex flex-row justify-between bg-white items-center border-[#E6E6E8] h-[70px] my-[4px] rounded-[8px] p-[10px]">
+    <div className="w-full border-[2px] flex flex-row justify-between bg-white items-center border-[#E6E6E8] h-auto my-[4px] rounded-[8px] p-[10px]">
       <div className="bg-white flex flex-row justify-start items-center">
         {icon ? (
           <img src={icon} className="bg-white w-[52px] h-[52px] rounded-md" />
