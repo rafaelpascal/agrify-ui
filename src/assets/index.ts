@@ -11,6 +11,9 @@ import action from "./icons/action.svg";
 import backIcon from "./icons/backicon.svg";
 import farmer from "./images/farmer.svg";
 import money from "./icons/moneys.svg";
+import pendingorder from "./icons/pendingorder.png";
+import totalsales from "./icons/totalsales.svg";
+import stockleft from "./icons/stockleft.png";
 import copy from "./icons/document-copy.svg";
 import cassava from "./images/cassava.svg";
 import potato from "./images/potato.svg";
@@ -32,4 +35,7 @@ export {
   copy,
   cassava,
   potato,
+  pendingorder,
+  stockleft,
+  totalsales,
 };

@@ -1,9 +1,18 @@
-import { backIcon, farmer, money, copy, cassava, potato } from "../assets";
+import {
+  backIcon,
+  farmer,
+  money,
+  pendingorder,
+  stockleft,
+  totalsales,
+  copy,
+  cassava,
+  potato,
+} from "../assets";
 import { DashboardArea } from "../components/ui/layout/dashboard/DashboardArea";
 import UserCards from "../components/ui/layout/cards/UserCards";
-import { BaseTable } from "../components/table/BaseTable";
-
 import { useState } from "react";
+import { MarchantProductTable } from "../components/table/MarchantProductTable";
 
 const transactionTableHeaders = [
   "Product Detail",
@@ -30,22 +39,22 @@ function Account() {
     {
       Icon: money,
       title: "Total Product",
-      value: 2000,
+      value: 3234,
     },
     {
-      Icon: money,
-      title: "Total Product",
-      value: 2000,
+      Icon: totalsales,
+      title: "Total Sales",
+      value: 300230,
     },
     {
-      Icon: money,
-      title: "Total Product",
-      value: 2000,
+      Icon: stockleft,
+      title: "Stock Left",
+      value: 2500,
     },
     {
-      Icon: money,
-      title: "Total Product",
-      value: 2000,
+      Icon: pendingorder,
+      title: "Pending Orders",
+      value: 10,
     },
   ]);
   const [transactionsMockTableRows] = useState([
@@ -244,7 +253,7 @@ function Account() {
         </div>
       </div>
       <div className="pt-4 rounded-lg">
-        <BaseTable
+        <MarchantProductTable
           tableRows={
             searchQuery ? filteredTableRows : transactionsMockTableRows
           }

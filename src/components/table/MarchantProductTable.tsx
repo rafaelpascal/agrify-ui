@@ -4,8 +4,9 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import Checkbox from "../ui/data_inputs/check-box";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { Avatar } from "../ui/avatar";
+import { MarchantEditModal } from "../ui/modals/MarchantEditModal";
+import { ProductDetails } from "../ui/modals/ProductDetails";
 
 interface IBaseTable {
   showPagination?: boolean;
@@ -14,15 +15,26 @@ interface IBaseTable {
   tableRows: (string | Record<string, string | boolean | undefined>)[][];
 }
 
-export const BaseTable = ({
+interface ProductView {
+  id: string | boolean | undefined;
+  status: boolean;
+}
+export const MarchantProductTable = ({
   // showPagination = false,
   headers,
   headersClassName,
   tableRows,
 }: IBaseTable) => {
   const [itemsPerPage] = useState(10);
-  const navigate = useNavigate();
   const [Isactionmodal, setIsactionmodal] = useState<number | boolean>(false);
+  const [isEditProduct, setIsEditProduct] = useState<ProductView>({
+    id: "",
+    status: false,
+  });
+  const [isViewProduct, setIsViewProduct] = useState<ProductView>({
+    id: "",
+    status: false,
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -46,12 +58,19 @@ export const BaseTable = ({
     setCheckedRows(newCheckedRows);
     setIsHeaderChecked(newCheckedRows.every((item) => item));
   };
-  const handleOpenaccount = (userId: string | boolean | undefined) => {
-    console.log(userId);
-    setIsactionmodal(false);
-    navigate("/users/account");
-  };
 
+  const handleclose = () => {
+    setIsEditProduct({
+      id: "",
+      status: false,
+    });
+  };
+  const handleViewClose = () => {
+    setIsViewProduct({
+      id: "",
+      status: false,
+    });
+  };
   function handleTableRowAppend(
     row: string | Record<string, string | boolean | undefined>,
     rowIndex: number
@@ -94,12 +113,25 @@ export const BaseTable = ({
                 className="absolute w-[93px] flex flex-col justify-between items-start p-[10px] h-auto rounded-[4px] shadow-lg z-20 top-8 left-0 right-0 bg-white"
               >
                 <button
-                  onClick={() => handleOpenaccount(row.userId)}
+                  onClick={() =>
+                    setIsViewProduct({
+                      id: row.userId,
+                      status: true,
+                    })
+                  }
                   className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]"
                 >
                   View
                 </button>
-                <button className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]">
+                <button
+                  className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]"
+                  onClick={() =>
+                    setIsEditProduct({
+                      id: row.userId,
+                      status: true,
+                    })
+                  }
+                >
                   Edit
                 </button>
                 <button className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]">
@@ -235,6 +267,16 @@ export const BaseTable = ({
           </button>
         </div>
       </div>
+      <MarchantEditModal
+        userId={isEditProduct.id}
+        isOpen={isEditProduct.status}
+        closeModal={handleclose}
+      />
+      <ProductDetails
+        userId={isViewProduct.id}
+        isOpen={isViewProduct.status}
+        closeModal={handleViewClose}
+      />
     </div>
   );
 };

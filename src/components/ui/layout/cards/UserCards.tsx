@@ -8,7 +8,7 @@ const UserCards = (props: CardProps) => {
   const { Icon, title, value } = props;
 
   return (
-    <div className="bg-themeWhite py-3 px-5 w-[150px] h-[161px] flex-col flex justify-evenly items-start rounded-[8px] border-[1px] border-[#E6E8EF]">
+    <div className="bg-themeWhite py-3 px-5 w-[190px] h-[161px] flex-col flex justify-evenly items-start rounded-[8px] border-[1px] border-[#E6E8EF]">
       <img src={Icon} className="bg-themeWhite" />
       <h2 className="bg-themeWhite w-[52px] text-[14px] font-normal text-[#8F94A8] font-DMSans">
         {title}
