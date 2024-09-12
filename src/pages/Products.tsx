@@ -4,8 +4,6 @@ import { ProductsTable } from "../components/table/ProductsTable";
 import { cassava } from "../assets";
 import { TiPlus } from "react-icons/ti";
 import { ArrowDropDown, Search } from "react-huge-icons/outline";
-import { RiDropdownList } from "react-icons/ri";
-import { BsDownload } from "react-icons/bs";
 
 const transactionTableHeaders = [
   "Product Detail",
