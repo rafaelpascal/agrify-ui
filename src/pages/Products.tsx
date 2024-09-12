@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { DashboardArea } from "../components/ui/layout/dashboard/DashboardArea";
-import { UsersTable } from "../components/table/UsersTable";
 import { motion } from "framer-motion";
+import { ProductsTable } from "../components/table/ProductsTable";
+import { cassava } from "../assets";
 
 const transactionTableHeaders = [
-  "Name",
-  "Email address",
-  "Phone number",
-  "Date joined",
-  "Location",
-  "Status",
+  "Product Detail",
+  "Category",
+  "Price per unit",
+  "Stock Price",
+  "Seller",
+  "Qty Added",
+  "Qty Left",
   "Action",
 ];
 
@@ -20,100 +22,60 @@ interface IBaseTable {
   tableRows: (string | Record<string, string | boolean | undefined>)[][];
 }
 
-const Users = () => {
+const Products = () => {
   const [searchQuery] = useState("");
   const [filteredTableRows] = useState<IBaseTable["tableRows"]>([]);
   const [marchant] = useState("140");
   const [shoppera] = useState("2000");
   const [transactionsMockTableRows] = useState([
     [
-      { hascheck: true, haspicture: false, name: "Musa Ahmed" },
-      "Musaaa@email.com",
-      "08164193471",
-      "30 Mar, 2024",
-      "Kaduna State",
-      { isStatus: true, statusText: "Active" },
+      { hascheck: true, img: cassava, haspicture: true, name: "Cassava" },
+      { isCategory: true, statusText: "Tuber" },
+      "₦900",
+      "₦122,900",
+      { isName: true, statusText: "Musa. A" },
+      "2500 pcs",
+      "25 pcs",
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
     [
-      { hascheck: true, haspicture: false, name: "Imra Moha" },
-      "",
-      "08164293471",
-      "31 Mar, 2024",
-      "Abuja",
-      { isStatus: false, statusText: "Inactive" },
+      { hascheck: true, img: cassava, haspicture: true, name: "Cassava" },
+      { isCategory: true, statusText: "Tuber" },
+      "₦900",
+      "₦122,900",
+      { isName: true, statusText: "Musa. A" },
+      "2500 pcs",
+      "25 pcs",
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
     [
-      { hascheck: true, haspicture: false, name: "Imran Moha" },
-      "Musaa@email.com",
-      "08164393471",
-      "32 Mar, 2024",
-      "Kano",
-      { isStatus: true, statusText: "Active" },
+      { hascheck: true, img: cassava, haspicture: true, name: "Cassava" },
+      { isCategory: true, statusText: "Tuber" },
+      "₦900",
+      "₦122,900",
+      { isName: true, statusText: "Musa. A" },
+      "2500 pcs",
+      "25 pcs",
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
     [
-      { hascheck: true, haspicture: false, name: "Imrann Moha" },
-      "",
-      "08164493471",
-      "33 Mar, 2024",
-      "Anambra 1",
-      { isStatus: false, statusText: "Inactive" },
+      { hascheck: true, img: cassava, haspicture: true, name: "Cassava" },
+      { isCategory: true, statusText: "Tuber" },
+      "₦900",
+      "₦122,900",
+      { isName: true, statusText: "Musa. A" },
+      "2500 pcs",
+      "25 pcs",
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
     [
-      { hascheck: true, haspicture: false, name: "Imren Moha" },
-      "",
-      "08164593471",
-      "34 Mar, 2024",
-      "Kaduna Village",
-      { isStatus: true, statusText: "Active" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrdan Moha" },
-      "Musaac@email.com",
-      "08164693471",
-      "35 Mar, 2024",
-      "Enugu",
-      { isStatus: false, statusText: "Inactive" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrfan Moha" },
-      "",
-      "08164793471",
-      "36 Mar, 2024",
-      "Kaduna",
-      { isStatus: true, statusText: "Active" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrcan Moha" },
-      "Musaad@email.com",
-      "08164893471",
-      "37 Mar, 2024",
-      "Kaduna Town",
-      { isStatus: false, statusText: "Inactive" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrayn Moha" },
-      "Musaae@email.com",
-      "08164993471",
-      "38 Mar, 2024",
-      "Abia",
-      { isStatus: true, statusText: "Active" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrhan Moha" },
-      "Musaaf@email.com",
-      "08164093471",
-      "39 Mar, 2024",
-      "Ebonyi ",
-      { isStatus: false, statusText: "Inactive" },
+      { hascheck: true, img: cassava, haspicture: true, name: "Cassava" },
+      { isCategory: true, statusText: "Tuber" },
+      "₦900",
+      "₦122,900",
+      { isName: true, statusText: "Musa. A" },
+      "2500 pcs",
+      "25 pcs",
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
   ]);
@@ -170,9 +132,7 @@ const Users = () => {
 
   return (
     <DashboardArea title={`Raphael`}>
-      <h2 className="mb-4 px-5 text-[14px] font-semibold font-DMSans text-[#8F94A8]">
-        Users
-      </h2>
+      <h2 className="mb-4">Users</h2>
       <div className="h-auto bg-white p-3 rounded-[12px]">
         <div className="rounded-[12px] mb-3 w-full lg:w-[25%] h-[39px] flex gap-2 flex-row justify-between items-center px-3 py-1">
           <button
@@ -214,7 +174,7 @@ const Users = () => {
           </button>
         </div>
         {isMarchantTable && (
-          <UsersTable
+          <ProductsTable
             tableRows={
               searchQuery ? filteredTableRows : transactionsMockTableRows
             }
@@ -223,7 +183,7 @@ const Users = () => {
           />
         )}
         {isShoppersTable && (
-          <UsersTable
+          <ProductsTable
             tableRows={searchQuery ? filteredTableRows : shoppersMockTableRows}
             headers={transactionTableHeaders}
             showPagination={true}
@@ -234,4 +194,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Products;

@@ -9,7 +9,10 @@ export const TopNav = ({ title }: TopNavProps) => {
   return (
     <header className="flex w-full justify-between items-center max-md:items-start">
       <div>
-        <Heading level={6} className="text-[20px] font-bold md:text-[20px]">
+        <Heading
+          level={6}
+          className="text-[16px] text-[#000] font-bold md:text-[16px]"
+        >
           {title}
         </Heading>
       </div>

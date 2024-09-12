@@ -13,6 +13,7 @@ import { DashboardArea } from "../components/ui/layout/dashboard/DashboardArea";
 import UserCards from "../components/ui/layout/cards/UserCards";
 import { useState } from "react";
 import { MarchantProductTable } from "../components/table/MarchantProductTable";
+import { RiArrowRightSLine } from "react-icons/ri";
 
 const transactionTableHeaders = [
   "Product Detail",
@@ -146,10 +147,17 @@ function Account() {
   ]);
 
   return (
-    <DashboardArea title={`Welcome Raphael`}>
-      <div className="flex flex-row justify-start items-start gap-3">
-        <span>Users</span>
-        <span>Marchant's Details </span>
+    <DashboardArea title={`Raphael`}>
+      <div className="flex flex-row justify-start items-start">
+        <span className="text-[14px] font-semibold font-DMSans text-[#8F94A8]">
+          Users
+        </span>
+        <span>
+          <RiArrowRightSLine />
+        </span>
+        <span className="text-[14px] font-semibold font-DMSans text-[#415BE6]">
+          Marchant's Details{" "}
+        </span>
       </div>
       <div className="mt-4">
         <button className="w-[77px] h-auto bg-themeGreen/10 flex justify-center items-center rounded-[8px] px-2 py-1">

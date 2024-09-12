@@ -156,7 +156,7 @@ const Home = () => {
   ]);
 
   return (
-    <DashboardArea title={`Welcome Raphael`}>
+    <DashboardArea title={`Raphael`}>
       <div className="w-full">
         <DashboardCardRow dashboardHeroCards={dashboardHeroCards} />
       </div>

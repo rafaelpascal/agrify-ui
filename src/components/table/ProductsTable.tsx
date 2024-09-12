@@ -5,7 +5,6 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import Checkbox from "../ui/data_inputs/check-box";
 import { motion } from "framer-motion";
 import { Avatar } from "../ui/avatar";
-import { MarchantEditModal } from "../ui/modals/MarchantEditModal";
 import { ProductDetails } from "../ui/modals/ProductDetails";
 
 interface IBaseTable {
@@ -19,7 +18,8 @@ interface ProductView {
   id: string | boolean | undefined;
   status: boolean;
 }
-export const MarchantProductTable = ({
+
+export const ProductsTable = ({
   // showPagination = false,
   headers,
   headersClassName,
@@ -27,10 +27,6 @@ export const MarchantProductTable = ({
 }: IBaseTable) => {
   const [itemsPerPage] = useState(10);
   const [Isactionmodal, setIsactionmodal] = useState<number | boolean>(false);
-  const [isEditProduct, setIsEditProduct] = useState<ProductView>({
-    id: "",
-    status: false,
-  });
   const [isViewProduct, setIsViewProduct] = useState<ProductView>({
     id: "",
     status: false,
@@ -52,19 +48,6 @@ export const MarchantProductTable = ({
     setCheckedRows(new Array(tableRows.length).fill(checked));
   };
 
-  const handleRowCheckboxChange = (index: number, checked: boolean) => {
-    const newCheckedRows = [...checkedRows];
-    newCheckedRows[index] = checked;
-    setCheckedRows(newCheckedRows);
-    setIsHeaderChecked(newCheckedRows.every((item) => item));
-  };
-
-  const handleclose = () => {
-    setIsEditProduct({
-      id: "",
-      status: false,
-    });
-  };
   const handleViewClose = () => {
     setIsViewProduct({
       id: "",
@@ -79,14 +62,13 @@ export const MarchantProductTable = ({
     });
     setIsactionmodal(false);
   };
-  const handleEditProduct = (userId: string | boolean | undefined) => {
-    setIsEditProduct({
-      id: userId,
-      status: true,
-    });
-    setIsactionmodal(false);
-  };
 
+  const handleRowCheckboxChange = (index: number, checked: boolean) => {
+    const newCheckedRows = [...checkedRows];
+    newCheckedRows[index] = checked;
+    setCheckedRows(newCheckedRows);
+    setIsHeaderChecked(newCheckedRows.every((item) => item));
+  };
   function handleTableRowAppend(
     row: string | Record<string, string | boolean | undefined>,
     rowIndex: number
@@ -94,15 +76,21 @@ export const MarchantProductTable = ({
     if (typeof row === "string") {
       return row;
     } else {
-      if (row.isStatus === true && row.statusText) {
+      if (row.isCategory === true && row.statusText) {
         return (
-          <div className="bg-themeGreen/10 text-themeGreen  flex justify-center items-center w-[70px] rounded-[4px] px-[10px] py-1">
+          <div className="bg-[#F5F6FB] text-[#435060]  flex justify-center items-center w-[70px] rounded-[4px] px-[10px] py-1">
             {row.statusText}
           </div>
         );
-      } else if (row.isStatus === false && row.statusText) {
+      } else if (row.isCategory === false && row.statusText) {
         return (
           <div className="bg-[#CD266C]/10 text-[#CD266C] flex justify-center items-center w-[90px] rounded-[4px] px-[10px] py-1">
+            {row.statusText}
+          </div>
+        );
+      } else if (row.isName === true && row.statusText) {
+        return (
+          <div className=" text-[#435060] font-bold bg-white">
             {row.statusText}
           </div>
         );
@@ -134,10 +122,7 @@ export const MarchantProductTable = ({
                 >
                   View
                 </button>
-                <button
-                  className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]"
-                  onClick={() => handleEditProduct(row.userId)}
-                >
+                <button className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]">
                   Edit
                 </button>
                 <button className="text-[12px] font-normal py-1 font-DMSans text-[#CD266C] hover:bg-[#CD266C]/10 w-full text-left p-2 rounded-[4px]">
@@ -273,11 +258,6 @@ export const MarchantProductTable = ({
           </button>
         </div>
       </div>
-      <MarchantEditModal
-        userId={isEditProduct.id}
-        isOpen={isEditProduct.status}
-        closeModal={handleclose}
-      />
       <ProductDetails
         userId={isViewProduct.id}
         isOpen={isViewProduct.status}

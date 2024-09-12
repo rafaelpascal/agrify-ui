@@ -38,6 +38,7 @@ const Checkbox: React.FC<CheckInputProps> = ({
         type="checkbox"
         checked={isChecked}
         onChange={handleCheckboxChange}
+        className="cursor-pointer"
       />
       {children}
     </label>

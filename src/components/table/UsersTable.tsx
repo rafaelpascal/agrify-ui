@@ -4,9 +4,8 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import Checkbox from "../ui/data_inputs/check-box";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Avatar } from "../ui/avatar";
-import { MarchantEditModal } from "../ui/modals/MarchantEditModal";
-import { ProductDetails } from "../ui/modals/ProductDetails";
 
 interface IBaseTable {
   showPagination?: boolean;
@@ -15,26 +14,15 @@ interface IBaseTable {
   tableRows: (string | Record<string, string | boolean | undefined>)[][];
 }
 
-interface ProductView {
-  id: string | boolean | undefined;
-  status: boolean;
-}
-export const MarchantProductTable = ({
+export const UsersTable = ({
   // showPagination = false,
   headers,
   headersClassName,
   tableRows,
 }: IBaseTable) => {
   const [itemsPerPage] = useState(10);
+  const navigate = useNavigate();
   const [Isactionmodal, setIsactionmodal] = useState<number | boolean>(false);
-  const [isEditProduct, setIsEditProduct] = useState<ProductView>({
-    id: "",
-    status: false,
-  });
-  const [isViewProduct, setIsViewProduct] = useState<ProductView>({
-    id: "",
-    status: false,
-  });
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -58,33 +46,10 @@ export const MarchantProductTable = ({
     setCheckedRows(newCheckedRows);
     setIsHeaderChecked(newCheckedRows.every((item) => item));
   };
-
-  const handleclose = () => {
-    setIsEditProduct({
-      id: "",
-      status: false,
-    });
-  };
-  const handleViewClose = () => {
-    setIsViewProduct({
-      id: "",
-      status: false,
-    });
-  };
-
-  const handleOpenView = (userId: string | boolean | undefined) => {
-    setIsViewProduct({
-      id: userId,
-      status: true,
-    });
+  const handleOpenaccount = (userId: string | boolean | undefined) => {
+    console.log(userId);
     setIsactionmodal(false);
-  };
-  const handleEditProduct = (userId: string | boolean | undefined) => {
-    setIsEditProduct({
-      id: userId,
-      status: true,
-    });
-    setIsactionmodal(false);
+    navigate("/users/account");
   };
 
   function handleTableRowAppend(
@@ -95,17 +60,9 @@ export const MarchantProductTable = ({
       return row;
     } else {
       if (row.isStatus === true && row.statusText) {
-        return (
-          <div className="bg-themeGreen/10 text-themeGreen  flex justify-center items-center w-[70px] rounded-[4px] px-[10px] py-1">
-            {row.statusText}
-          </div>
-        );
+        return <div className="bg-white text-themeGreen">{row.statusText}</div>;
       } else if (row.isStatus === false && row.statusText) {
-        return (
-          <div className="bg-[#CD266C]/10 text-[#CD266C] flex justify-center items-center w-[90px] rounded-[4px] px-[10px] py-1">
-            {row.statusText}
-          </div>
-        );
+        return <div className="bg-white text-[#CD266C]">{row.statusText}</div>;
       } else if (row.action === true && row.userId) {
         return (
           <div className="relative bg-white">
@@ -129,19 +86,16 @@ export const MarchantProductTable = ({
                 className="absolute w-[93px] flex flex-col justify-between items-start p-[10px] h-auto rounded-[4px] shadow-lg z-20 top-8 left-0 right-0 bg-white"
               >
                 <button
-                  onClick={() => handleOpenView(row.userId)}
+                  onClick={() => handleOpenaccount(row.userId)}
                   className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]"
                 >
                   View
                 </button>
-                <button
-                  className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]"
-                  onClick={() => handleEditProduct(row.userId)}
-                >
+                <button className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]">
                   Edit
                 </button>
-                <button className="text-[12px] font-normal py-1 font-DMSans text-[#CD266C] hover:bg-[#CD266C]/10 w-full text-left p-2 rounded-[4px]">
-                  Delete
+                <button className="text-[12px] font-normal py-1 font-DMSans text-[#25313E] hover:bg-themeGreen/10 w-full text-left p-2 rounded-[4px]">
+                  Deactivate
                 </button>
               </motion.div>
             )}
@@ -273,16 +227,6 @@ export const MarchantProductTable = ({
           </button>
         </div>
       </div>
-      <MarchantEditModal
-        userId={isEditProduct.id}
-        isOpen={isEditProduct.status}
-        closeModal={handleclose}
-      />
-      <ProductDetails
-        userId={isViewProduct.id}
-        isOpen={isViewProduct.status}
-        closeModal={handleViewClose}
-      />
     </div>
   );
 };
