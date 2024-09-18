@@ -4,6 +4,7 @@ import Home from "../pages/Home.js";
 import Users from "../pages/Users.js";
 import Account from "../pages/Account.js";
 import Products from "../pages/Products.js";
+import Orders from "../pages/Orders.js";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
       },
     ],
   },

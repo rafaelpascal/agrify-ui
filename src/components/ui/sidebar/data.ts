@@ -5,5 +5,5 @@ export const sidebarData: SideNavProps[] = [
   { href: "/dashboard", icon: Home, text: "Dashboard" },
   { href: "/users", icon: InvoicePercent, text: "Users" },
   { href: "/products", icon: Store, text: "Products" },
-  { href: "/settings", icon: Setting, text: "Settings" },
+  { href: "/orders", icon: Setting, text: "Orders" },
 ];
