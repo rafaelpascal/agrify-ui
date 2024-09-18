@@ -4,16 +4,19 @@ import { DashboardCardRow } from "../components/grouped-components/dashboard-car
 import { stock, sales, product } from "../assets";
 import { DashboardCardProps } from "../components/ui/dashboard-card";
 import { motion } from "framer-motion";
-import { UsersTable } from "../components/table/UsersTable";
+import { AllOrdersTable } from "../components/table/AllOrdersTable";
 
 const transactionTableHeaders = [
-  "Item",
-  "Category",
+  "Order No",
+  "Product",
+  "Customer",
+  "Quantity",
   "Price",
-  "Date Added",
   "Seller",
-  "Qty Left",
+  "Date created",
+  "Delivery date",
   "Status",
+  "Action",
 ];
 
 interface IBaseTable {
@@ -29,133 +32,110 @@ const Orders = () => {
   const [active] = useState("15");
   const [delivered] = useState("6");
   const [failed] = useState("2");
-  const [transactionsMockTableRows] = useState([
+  const [allOrderMockTableRows] = useState([
     [
-      { hascheck: true, haspicture: false, name: "Musa Ahmed" },
-      "Musaaa@email.com",
-      "08164193471",
-      "30 Mar, 2024",
-      "Kaduna State",
-      { isStatus: true, statusText: "Active" },
+      { hascheck: true, OrderNo: "001273" },
+      "Cassava",
+      "Sandra O",
+      "3 baskets",
+      "₦50,000",
+      "Musa. A",
+      "01/Apr/2024",
+      "01/Apr/2024",
+      { statusText: "Delivered" },
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
     [
-      { hascheck: true, haspicture: false, name: "Imra Moha" },
-      "",
-      "08164293471",
-      "31 Mar, 2024",
-      "Abuja",
-      { isStatus: false, statusText: "Inactive" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imran Moha" },
-      "Musaa@email.com",
-      "08164393471",
-      "32 Mar, 2024",
-      "Kano",
-      { isStatus: true, statusText: "Active" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrann Moha" },
-      "",
-      "08164493471",
-      "33 Mar, 2024",
-      "Anambra 1",
-      { isStatus: false, statusText: "Inactive" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imren Moha" },
-      "",
-      "08164593471",
-      "34 Mar, 2024",
-      "Kaduna Village",
-      { isStatus: true, statusText: "Active" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrdan Moha" },
-      "Musaac@email.com",
-      "08164693471",
-      "35 Mar, 2024",
-      "Enugu",
-      { isStatus: false, statusText: "Inactive" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrfan Moha" },
-      "",
-      "08164793471",
-      "36 Mar, 2024",
-      "Kaduna",
-      { isStatus: true, statusText: "Active" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrcan Moha" },
-      "Musaad@email.com",
-      "08164893471",
-      "37 Mar, 2024",
-      "Kaduna Town",
-      { isStatus: false, statusText: "Inactive" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrayn Moha" },
-      "Musaae@email.com",
-      "08164993471",
-      "38 Mar, 2024",
-      "Abia",
-      { isStatus: true, statusText: "Active" },
-      { action: true, userId: "dhjduyweywueweiwewe8we92" },
-    ],
-    [
-      { hascheck: true, haspicture: false, name: "Imrhan Moha" },
-      "Musaaf@email.com",
-      "08164093471",
-      "39 Mar, 2024",
-      "Ebonyi ",
-      { isStatus: false, statusText: "Inactive" },
+      { hascheck: true, OrderNo: "001273" },
+      "Cassava",
+      "Sandra O",
+      "3 baskets",
+      "₦50,000",
+      "Musa. A",
+      "01/Apr/2024",
+      "01/Apr/2024",
+      { statusText: "Pending" },
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
   ]);
-  const [shoppersMockTableRows] = useState([
+
+  const [activeOrderMockTableRows] = useState([
     [
-      { hascheck: true, haspicture: false, name: "Musa Ahmed" },
-      "Musaa1@email.com",
-      "08164113471",
-      "40 Mar, 2024",
-      "Benue ",
-      { isStatus: true, statusText: "Active" },
+      { hascheck: true, OrderNo: "001273" },
+      "Cassava",
+      "Sandra O",
+      "3 baskets",
+      "₦50,000",
+      "Musa. A",
+      "01/Apr/2024",
+      "01/Apr/2024",
+      { statusText: "Pending" },
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
     [
-      { hascheck: true, haspicture: false, name: "Imrann Moha" },
-      "",
-      "08164123471",
-      "41 Mar, 2024",
-      "Abuja ",
-      { isStatus: false, statusText: "Inactive" },
+      { hascheck: true, OrderNo: "001273" },
+      "Cassava",
+      "Sandra O",
+      "3 baskets",
+      "₦50,000",
+      "Musa. A",
+      "01/Apr/2024",
+      "01/Apr/2024",
+      { statusText: "Pending" },
+      { action: true, userId: "dhjduyweywueweiwewe8we92" },
+    ],
+  ]);
+
+  const [deliveredOrderMockTableRows] = useState([
+    [
+      { hascheck: true, OrderNo: "001273" },
+      "Cassava",
+      "Sandra O",
+      "3 baskets",
+      "₦50,000",
+      "Musa. A",
+      "01/Apr/2024",
+      "01/Apr/2024",
+      { statusText: "Delivered" },
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
     [
-      { hascheck: true, haspicture: false, name: "Imramn Moha" },
-      "Musaa2@email.com",
-      "08164133471",
-      "42 Mar, 2024",
-      "Kano ",
-      { isStatus: true, statusText: "Active" },
+      { hascheck: true, OrderNo: "001273" },
+      "Cassava",
+      "Sandra O",
+      "3 baskets",
+      "₦50,000",
+      "Musa. A",
+      "01/Apr/2024",
+      "01/Apr/2024",
+      { statusText: "Delivered" },
+      { action: true, userId: "dhjduyweywueweiwewe8we92" },
+    ],
+  ]);
+
+  const [failedOrderMockTableRows] = useState([
+    [
+      { hascheck: true, OrderNo: "001273" },
+      "Cassava",
+      "Sandra O",
+      "3 baskets",
+      "₦50,000",
+      "Musa. A",
+      "01/Apr/2024",
+      "01/Apr/2024",
+      { statusText: "Failed" },
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
     [
-      { hascheck: true, haspicture: false, name: "Imrban Moha" },
-      "",
-      "08164143471",
-      "43 Mar, 2024",
-      "Anambra State",
-      { isStatus: false, statusText: "Inactive" },
+      { hascheck: true, OrderNo: "001273" },
+      "Cassava",
+      "Sandra O",
+      "3 baskets",
+      "₦50,000",
+      "Musa. A",
+      "01/Apr/2024",
+      "01/Apr/2024",
+      { statusText: "Failed" },
       { action: true, userId: "dhjduyweywueweiwewe8we92" },
     ],
   ]);
@@ -364,31 +344,35 @@ const Orders = () => {
           </button>
         </div>
         {isAllOrders && (
-          <UsersTable
-            tableRows={
-              searchQuery ? filteredTableRows : transactionsMockTableRows
-            }
+          <AllOrdersTable
+            tableRows={searchQuery ? filteredTableRows : allOrderMockTableRows}
             headers={transactionTableHeaders}
             showPagination={true}
           />
         )}
         {isActuveOrders && (
-          <UsersTable
-            tableRows={searchQuery ? filteredTableRows : shoppersMockTableRows}
+          <AllOrdersTable
+            tableRows={
+              searchQuery ? filteredTableRows : activeOrderMockTableRows
+            }
             headers={transactionTableHeaders}
             showPagination={true}
           />
         )}
         {isDelivered && (
-          <UsersTable
-            tableRows={searchQuery ? filteredTableRows : shoppersMockTableRows}
+          <AllOrdersTable
+            tableRows={
+              searchQuery ? filteredTableRows : deliveredOrderMockTableRows
+            }
             headers={transactionTableHeaders}
             showPagination={true}
           />
         )}
         {isFailed && (
-          <UsersTable
-            tableRows={searchQuery ? filteredTableRows : shoppersMockTableRows}
+          <AllOrdersTable
+            tableRows={
+              searchQuery ? filteredTableRows : failedOrderMockTableRows
+            }
             headers={transactionTableHeaders}
             showPagination={true}
           />
