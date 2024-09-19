@@ -17,6 +17,10 @@ import allOrder from "./icons/allOrder.svg";
 import pendingOrder from "./icons/delivery.svg";
 import deliveredOrder from "./icons/deliveredOrder.svg";
 import category from "./icons/category.svg";
+import revenue from "./icons/revenue.svg";
+import customer from "./icons/users.svg";
+import orders from "./icons/orders.svg";
+import delivery from "./icons/delivery.svg";
 import failedOrder from "./icons/failedOrder.svg";
 import people from "./icons/people.svg";
 import stockleft from "./icons/stockleft.png";
@@ -50,4 +54,8 @@ export {
   failedOrder,
   people,
   category,
+  revenue,
+  customer,
+  orders,
+  delivery,
 };

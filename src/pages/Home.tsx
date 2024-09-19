@@ -3,10 +3,10 @@ import { LineChartDemo } from "../components/charts/line-chart";
 import { DoughnutChartDemo } from "../components/charts/Doughnut";
 import { DashboardArea } from "../components/ui/layout/dashboard/DashboardArea";
 import { DashboardCardRow } from "../components/grouped-components/dashboard-card-row";
-import { stock, sales, product } from "../assets";
 import { DashboardCardProps } from "../components/ui/dashboard-card";
-import { BaseTable } from "../components/table/BaseTable";
+import { HomeTable } from "../components/table/HomeTable";
 import { BaseItem } from "../components/ui/item/BaseItem";
+import { cassava, revenue, customer, orders, delivery } from "../assets";
 
 const transactionTableHeaders = [
   "Item",
@@ -29,7 +29,7 @@ type ViewItem = {
   icon: string;
   title: string;
   qty: number;
-  status: boolean;
+  status: string;
   from: string;
   to: string;
   amount: number;
@@ -39,73 +39,73 @@ const Home = () => {
   const [filteredTableRows] = useState<IBaseTable["tableRows"]>([]);
   const [items] = useState<ViewItem[]>([
     {
-      icon: "https://s3-alpha-sig.figma.com/img/fe81/f559/28eca25e236811323f4593a35d3ce42c?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Syl0C-EfHp0~cSsLMeCSsJgSUz~cUGATaNoHLTvEImc1M1Lg4blAeNE73azHrv~jpqGhbih5gZscIOiDREdtsHrvdf54OpXuyWE8mh5kcUi9wLa1MasZdIUqHfQuwVB8fu22hXANtBrlHO~WUR5EOxfueOrzm2i56NYwkAeIvCj54--SRVVXnNFFiz3NUmJFOrDqcwJomVo1gjmmuhx1h9eFFMYLPm4GUxY8zCNxc7g3AsTYPAgr8UilSxkVQdm4f6hdbdyjV6RzI7vNGLPvfdEc2kmk14P7J5xv4jWSQsuurSRA61G2VLJJji8veZ8TG~8nmKKCDmGhClvlFCRFZw__",
+      icon: cassava,
       title: "Tomatoes",
       qty: 3,
-      status: false,
+      status: "Pending",
       from: "Mustapha A",
       to: "John  Ben",
       amount: 50000,
     },
     {
-      icon: "https://s3-alpha-sig.figma.com/img/fe81/f559/28eca25e236811323f4593a35d3ce42c?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Syl0C-EfHp0~cSsLMeCSsJgSUz~cUGATaNoHLTvEImc1M1Lg4blAeNE73azHrv~jpqGhbih5gZscIOiDREdtsHrvdf54OpXuyWE8mh5kcUi9wLa1MasZdIUqHfQuwVB8fu22hXANtBrlHO~WUR5EOxfueOrzm2i56NYwkAeIvCj54--SRVVXnNFFiz3NUmJFOrDqcwJomVo1gjmmuhx1h9eFFMYLPm4GUxY8zCNxc7g3AsTYPAgr8UilSxkVQdm4f6hdbdyjV6RzI7vNGLPvfdEc2kmk14P7J5xv4jWSQsuurSRA61G2VLJJji8veZ8TG~8nmKKCDmGhClvlFCRFZw__",
+      icon: cassava,
       title: "Tomatoes",
       qty: 3,
-      status: false,
+      status: "Pending",
       from: "Mustapha A",
       to: "John  Ben",
       amount: 50000,
     },
     {
-      icon: "https://s3-alpha-sig.figma.com/img/fe81/f559/28eca25e236811323f4593a35d3ce42c?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Syl0C-EfHp0~cSsLMeCSsJgSUz~cUGATaNoHLTvEImc1M1Lg4blAeNE73azHrv~jpqGhbih5gZscIOiDREdtsHrvdf54OpXuyWE8mh5kcUi9wLa1MasZdIUqHfQuwVB8fu22hXANtBrlHO~WUR5EOxfueOrzm2i56NYwkAeIvCj54--SRVVXnNFFiz3NUmJFOrDqcwJomVo1gjmmuhx1h9eFFMYLPm4GUxY8zCNxc7g3AsTYPAgr8UilSxkVQdm4f6hdbdyjV6RzI7vNGLPvfdEc2kmk14P7J5xv4jWSQsuurSRA61G2VLJJji8veZ8TG~8nmKKCDmGhClvlFCRFZw__",
+      icon: cassava,
       title: "Tomatoes",
       qty: 3,
-      status: false,
+      status: "Pending",
       from: "Mustapha A",
       to: "John  Ben",
       amount: 50000,
     },
     {
-      icon: "https://s3-alpha-sig.figma.com/img/fe81/f559/28eca25e236811323f4593a35d3ce42c?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Syl0C-EfHp0~cSsLMeCSsJgSUz~cUGATaNoHLTvEImc1M1Lg4blAeNE73azHrv~jpqGhbih5gZscIOiDREdtsHrvdf54OpXuyWE8mh5kcUi9wLa1MasZdIUqHfQuwVB8fu22hXANtBrlHO~WUR5EOxfueOrzm2i56NYwkAeIvCj54--SRVVXnNFFiz3NUmJFOrDqcwJomVo1gjmmuhx1h9eFFMYLPm4GUxY8zCNxc7g3AsTYPAgr8UilSxkVQdm4f6hdbdyjV6RzI7vNGLPvfdEc2kmk14P7J5xv4jWSQsuurSRA61G2VLJJji8veZ8TG~8nmKKCDmGhClvlFCRFZw__",
+      icon: cassava,
       title: "Tomatoes",
       qty: 3,
-      status: true,
+      status: "delivered",
       from: "Mustapha A",
       to: "John  Ben",
       amount: 50000,
     },
     {
-      icon: "https://s3-alpha-sig.figma.com/img/fe81/f559/28eca25e236811323f4593a35d3ce42c?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Syl0C-EfHp0~cSsLMeCSsJgSUz~cUGATaNoHLTvEImc1M1Lg4blAeNE73azHrv~jpqGhbih5gZscIOiDREdtsHrvdf54OpXuyWE8mh5kcUi9wLa1MasZdIUqHfQuwVB8fu22hXANtBrlHO~WUR5EOxfueOrzm2i56NYwkAeIvCj54--SRVVXnNFFiz3NUmJFOrDqcwJomVo1gjmmuhx1h9eFFMYLPm4GUxY8zCNxc7g3AsTYPAgr8UilSxkVQdm4f6hdbdyjV6RzI7vNGLPvfdEc2kmk14P7J5xv4jWSQsuurSRA61G2VLJJji8veZ8TG~8nmKKCDmGhClvlFCRFZw__",
+      icon: cassava,
       title: "Tomatoes",
       qty: 3,
-      status: true,
+      status: "delivered",
       from: "Mustapha A",
       to: "John  Ben",
       amount: 50000,
     },
     {
-      icon: "https://s3-alpha-sig.figma.com/img/fe81/f559/28eca25e236811323f4593a35d3ce42c?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Syl0C-EfHp0~cSsLMeCSsJgSUz~cUGATaNoHLTvEImc1M1Lg4blAeNE73azHrv~jpqGhbih5gZscIOiDREdtsHrvdf54OpXuyWE8mh5kcUi9wLa1MasZdIUqHfQuwVB8fu22hXANtBrlHO~WUR5EOxfueOrzm2i56NYwkAeIvCj54--SRVVXnNFFiz3NUmJFOrDqcwJomVo1gjmmuhx1h9eFFMYLPm4GUxY8zCNxc7g3AsTYPAgr8UilSxkVQdm4f6hdbdyjV6RzI7vNGLPvfdEc2kmk14P7J5xv4jWSQsuurSRA61G2VLJJji8veZ8TG~8nmKKCDmGhClvlFCRFZw__",
+      icon: cassava,
       title: "Tomatoes",
       qty: 3,
-      status: false,
+      status: "Cancelled",
       from: "Mustapha A",
       to: "John  Ben",
       amount: 50000,
     },
     {
-      icon: "https://s3-alpha-sig.figma.com/img/fe81/f559/28eca25e236811323f4593a35d3ce42c?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Syl0C-EfHp0~cSsLMeCSsJgSUz~cUGATaNoHLTvEImc1M1Lg4blAeNE73azHrv~jpqGhbih5gZscIOiDREdtsHrvdf54OpXuyWE8mh5kcUi9wLa1MasZdIUqHfQuwVB8fu22hXANtBrlHO~WUR5EOxfueOrzm2i56NYwkAeIvCj54--SRVVXnNFFiz3NUmJFOrDqcwJomVo1gjmmuhx1h9eFFMYLPm4GUxY8zCNxc7g3AsTYPAgr8UilSxkVQdm4f6hdbdyjV6RzI7vNGLPvfdEc2kmk14P7J5xv4jWSQsuurSRA61G2VLJJji8veZ8TG~8nmKKCDmGhClvlFCRFZw__",
+      icon: cassava,
       title: "Tomatoes",
       qty: 3,
-      status: true,
+      status: "delivered",
       from: "Mustapha A",
       to: "John  Ben",
       amount: 50000,
     },
     {
-      icon: "https://s3-alpha-sig.figma.com/img/fe81/f559/28eca25e236811323f4593a35d3ce42c?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Syl0C-EfHp0~cSsLMeCSsJgSUz~cUGATaNoHLTvEImc1M1Lg4blAeNE73azHrv~jpqGhbih5gZscIOiDREdtsHrvdf54OpXuyWE8mh5kcUi9wLa1MasZdIUqHfQuwVB8fu22hXANtBrlHO~WUR5EOxfueOrzm2i56NYwkAeIvCj54--SRVVXnNFFiz3NUmJFOrDqcwJomVo1gjmmuhx1h9eFFMYLPm4GUxY8zCNxc7g3AsTYPAgr8UilSxkVQdm4f6hdbdyjV6RzI7vNGLPvfdEc2kmk14P7J5xv4jWSQsuurSRA61G2VLJJji8veZ8TG~8nmKKCDmGhClvlFCRFZw__",
+      icon: cassava,
       title: "Tomatoes",
       qty: 3,
-      status: false,
+      status: "Cancelled",
       from: "Mustapha A",
       to: "John  Ben",
       amount: 50000,
@@ -114,29 +114,29 @@ const Home = () => {
   const [searchQuery] = useState("");
   const [dashboardHeroCards] = useState<DashboardCardProps[]>([
     {
-      icon: product,
+      icon: revenue,
       title: "Total Revenue",
       value: 0,
     },
     {
-      icon: sales,
+      icon: customer,
       title: "Total Customers",
       value: 3000,
     },
     {
-      icon: stock,
+      icon: orders,
       title: "Total Order",
       value: 0,
     },
     {
-      icon: stock,
+      icon: delivery,
       title: "Pending Delivery",
       value: 0,
     },
   ]);
   const [transactionsMockTableRows] = useState([
     [
-      { hasAvatar: false, statusText: "", img: "", name: "Yam" },
+      "Yam",
       "Cerels",
       "₦12,2200",
       "31 Mar, 2024",
@@ -145,7 +145,97 @@ const Home = () => {
       { isStatus: true, statusText: "In stock" },
     ],
     [
-      { hasAvatar: false, statusText: "", img: "", name: "Maize" },
+      "Maize",
+      "Grains",
+      "₦12,900",
+      "30 Mar, 2024",
+      "Buhari",
+      "5 bags",
+      { isStatus: false, statusText: "No stock" },
+    ],
+    [
+      "Yam",
+      "Cerels",
+      "₦12,2200",
+      "31 Mar, 2024",
+      "Buha",
+      "10 bags",
+      { isStatus: true, statusText: "In stock" },
+    ],
+    [
+      "Maize",
+      "Grains",
+      "₦12,900",
+      "30 Mar, 2024",
+      "Buhari",
+      "5 bags",
+      { isStatus: false, statusText: "No stock" },
+    ],
+    [
+      "Yam",
+      "Cerels",
+      "₦12,2200",
+      "31 Mar, 2024",
+      "Buha",
+      "10 bags",
+      { isStatus: true, statusText: "In stock" },
+    ],
+    [
+      "Maize",
+      "Grains",
+      "₦12,900",
+      "30 Mar, 2024",
+      "Buhari",
+      "5 bags",
+      { isStatus: false, statusText: "No stock" },
+    ],
+    [
+      "Yam",
+      "Cerels",
+      "₦12,2200",
+      "31 Mar, 2024",
+      "Buha",
+      "10 bags",
+      { isStatus: true, statusText: "In stock" },
+    ],
+    [
+      "Maize",
+      "Grains",
+      "₦12,900",
+      "30 Mar, 2024",
+      "Buhari",
+      "5 bags",
+      { isStatus: false, statusText: "No stock" },
+    ],
+    [
+      "Yam",
+      "Cerels",
+      "₦12,2200",
+      "31 Mar, 2024",
+      "Buha",
+      "10 bags",
+      { isStatus: true, statusText: "In stock" },
+    ],
+    [
+      "Maize",
+      "Grains",
+      "₦12,900",
+      "30 Mar, 2024",
+      "Buhari",
+      "5 bags",
+      { isStatus: false, statusText: "No stock" },
+    ],
+    [
+      "Yam",
+      "Cerels",
+      "₦12,2200",
+      "31 Mar, 2024",
+      "Buha",
+      "10 bags",
+      { isStatus: true, statusText: "In stock" },
+    ],
+    [
+      "Maize",
       "Grains",
       "₦12,900",
       "30 Mar, 2024",
@@ -169,7 +259,7 @@ const Home = () => {
         </div>
       </div>
       <div className="flex lg:flex-row flex-col justify-between items-center">
-        <div className="bg-white p-4 w-full mb-4 lg:mb-0 lg:w-[59%] h-[331px] rounded-lg">
+        <div className="bg-white p-4 w-full mb-4 lg:mb-0 lg:w-[59%] h-[398px] rounded-lg">
           <div className="bg-white flex mb-5 flex-row justify-between items-center">
             <div className="bg-white">
               <h2 className="bg-white text-[14px] text-[#343434] font-bold font-DMSans">
@@ -183,7 +273,7 @@ const Home = () => {
               View Stock
             </button>
           </div>
-          <BaseTable
+          <HomeTable
             tableRows={
               searchQuery ? filteredTableRows : transactionsMockTableRows
             }
@@ -191,7 +281,7 @@ const Home = () => {
             showPagination={true}
           />
         </div>
-        <div className="bg-white w-full lg:w-[40%] h-[331px] p-4 rounded-lg">
+        <div className="bg-white w-full lg:w-[40%] h-[398px] p-4 rounded-lg">
           <div className="bg-white flex mb-5 flex-row justify-between items-center">
             <div className="bg-white">
               <h2 className="bg-white text-[14px] text-[#343434] font-bold font-DMSans">
@@ -201,11 +291,11 @@ const Home = () => {
                 200 orders delivered so far
               </p>
             </div>
-            <button className="w-auto p-[10px] rounded-[4px] text-[12px] font-semibold font-DMSans bg-[#F5F6FB]">
+            <button className="w-auto p-[10px] rounded-[4px] text-[12px] font-semibold font-DMSans text-[#435060] bg-[#F5F6FB]">
               More Details
             </button>
           </div>
-          <div className="h-[240px] rounded-[4px] overflow-y-auto bg-white">
+          <div className="h-[280px] rounded-[4px] overflow-y-auto bg-white">
             {items.map((item, index) => (
               <BaseItem
                 key={index}

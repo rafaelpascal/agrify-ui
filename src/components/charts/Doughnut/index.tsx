@@ -29,7 +29,7 @@ const options: ChartOptions<"doughnut"> = {
   responsive: true,
   plugins: {
     legend: {
-      display: false, // Disable the default legend
+      display: false,
     },
     title: {
       display: false,
@@ -39,16 +39,18 @@ const options: ChartOptions<"doughnut"> = {
 };
 
 const data: ChartData<"doughnut"> = {
-  labels: ["Red", "Blue", "Yellow"],
+  labels: ["Tubers", "Grains", "Bulbs", "Fruits", "Livestock"],
   datasets: [
     {
       label: "My First Dataset",
-      data: [300, 50, 100],
+      data: [300, 50, 100, 200, 400],
       weight: 1,
       backgroundColor: [
-        "rgb(255, 99, 132)",
-        "rgb(54, 162, 235)",
-        "rgb(255, 205, 86)",
+        "rgb(173, 216, 230)",
+        "rgb(144, 238, 144)",
+        "rgb(240, 128, 128)",
+        "rgb(238, 232, 170)",
+        "rgb(230, 230, 250)",
       ],
       hoverOffset: 8,
     },
@@ -64,22 +66,24 @@ const CustomLegend = ({ chartData }: { chartData: ChartData<"doughnut"> }) => {
         Categories
       </h2>
       {chartData.labels?.map((label, index) => (
-        <div
-          key={index}
-          className="flex justify-start bg-inherit items-start gap-2 mr-4"
-        >
-          <div className="flex justify-start bg-inherit items-start gap-2 mr-4">
-            <div
-              className="w-10 rounded-md opacity-35 bg-inherit h-4 mt-2 mr-2"
-              style={{
-                backgroundColor: backgroundColors[index],
-              }}
-            ></div>
-            <span className="bg-inherit text-[10px] mt-2 text-[#8F94A8] font-DMSans">
-              {label as string}
-            </span>
+        <div className="flex justify-between bg-inherit items-center">
+          <div
+            key={index}
+            className="flex justify-start bg-inherit items-center mr-4"
+          >
+            <div className="flex justify-start bg-inherit items-start gap-2 mr-4">
+              <div
+                className="w-10 rounded-md bg-inherit h-[7px] mt-1 mr-2"
+                style={{
+                  backgroundColor: backgroundColors[index],
+                }}
+              ></div>
+              <span className="bg-inherit w-[40px] text-[10px] p-0 mb-0 text-[#8F94A8] font-normal font-DMSans">
+                {label as string}
+              </span>
+            </div>
           </div>
-          <span className="bg-inherit text-left text-[10px] mt-2 text-[#435060] font-semibold font-DMSans">
+          <span className="bg-inherit text-left text-[10px] text-[#435060] ml-3 w-[200px] font-semibold font-DMSans">
             ₦ {dataValues[index]}
           </span>
         </div>
@@ -97,11 +101,10 @@ export function DoughnutChartDemo() {
   };
 
   useEffect(() => {
-    // Clean up previous chart instance before rendering a new one
     if (chartRef.current && chartRef.current.chart) {
       chartRef.current.chart.destroy();
     }
-  }, [data]); // Clean up when data changes
+  }, [data]);
 
   return (
     <ChartWrapper className="h-full bg-white rounded-xl px-3 w-full">
@@ -137,19 +140,19 @@ export function DoughnutChartDemo() {
               value="option1"
               className="bg-inherit text-[12px] text-[#8F94A8] font-DMSans"
             >
-              Option 1
+              Jan
             </option>
             <option
               value="option2"
               className="bg-inherit text-[12px] text-[#8F94A8] font-DMSans"
             >
-              Option 2
+              Feb
             </option>
             <option
               value="option3"
               className="bg-inherit text-[12px] text-[#8F94A8] font-DMSans"
             >
-              Option 3
+              March
             </option>
           </select>
         </div>
@@ -158,7 +161,7 @@ export function DoughnutChartDemo() {
         <CustomLegend chartData={data} />
         <div className="w-1/2 h-1/2 bg-white rounded-xl">
           <Doughnut
-            className="w-full bg-inherit p-4 rounded-xl"
+            className="w-full bg-inherit p-2 rounded-xl"
             ref={chartRef}
             options={{
               ...options,

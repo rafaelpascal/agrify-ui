@@ -45,7 +45,7 @@ const options = {
   },
 };
 
-const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
 
 const data = {
   labels: labels,
@@ -109,19 +109,19 @@ export function LineChartDemo() {
               value="option1"
               className="bg-inherit text-[12px] text-[#8F94A8] font-DMSans"
             >
-              Option 1
+              Jan
             </option>
             <option
               value="option2"
               className="bg-inherit text-[12px] text-[#8F94A8] font-DMSans"
             >
-              Option 2
+              Feb
             </option>
             <option
               value="option3"
               className="bg-inherit text-[12px] text-[#8F94A8] font-DMSans"
             >
-              Option 3
+              March
             </option>
           </select>
         </div>

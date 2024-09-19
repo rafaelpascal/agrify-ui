@@ -2,7 +2,7 @@ export interface DashboardCardProps {
   icon: string;
   title: string;
   qty: number;
-  status: boolean;
+  status: string;
   from: string;
   to: string;
 }
@@ -26,10 +26,15 @@ export const BaseItem = (props: DashboardCardProps) => {
           <p className="bg-white">No Image</p>
         )}
         <div className="bg-white flex ml-2 flex-col justify-between h-full items-start">
-          <p className="bg-white text-[14px] font-bold font-DMSans ">{title}</p>
+          <p className="bg-white text-[14px] font-bold font-DMSans text-[#25313E] ">
+            {title}
+          </p>
           <div className="bg-white flex flex-row justify-start items-center">
             <p className="bg-white mr-2 font-DMSans font-normal text-[#8F94A8] text-[13px]">
               {qty} baskets
+            </p>
+            <p className="bg-white mr-2 font-DMSans font-semibold text-[#435060] text-[13px]">
+              ₦50,000
             </p>
           </div>
           <div className="bg-white flex flex-row justify-between items-center">
@@ -42,12 +47,18 @@ export const BaseItem = (props: DashboardCardProps) => {
           </div>
         </div>
       </div>
-      {status === true ? (
-        <p className="rounded-[4px] text-[12px] text-[#25313E] font-DMSans font-semibold px-[10px] py-2 bg-themeGreen/10">
+      {status === "delivered" && (
+        <p className="rounded-[4px] w-[70px] flex justify-center items-center text-[12px] text-[#00A45F] font-DMSans font-semibold px-[10px] py-2 bg-themeGreen/10">
           Delivered
         </p>
-      ) : (
-        <p className="rounded-[4px] text-[12px] text-[#D48B1F] font-DMSans font-semibold px-[10px] py-2 bg-themeDanger/10">
+      )}
+      {status === "Cancelled" && (
+        <p className="rounded-[4px] w-[70px] flex justify-center items-center text-[12px] text-[#CD266C] font-DMSans font-semibold px-[10px] py-2 bg-[#CD266C1A]/10">
+          Cancelled
+        </p>
+      )}
+      {status === "Pending" && (
+        <p className="rounded-[4px] w-[70px] flex justify-center items-center text-[12px] text-[#415BE6] font-DMSans font-semibold px-[10px] py-2 bg-[#415BE61A]/10">
           Pending
         </p>
       )}
