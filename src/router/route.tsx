@@ -5,6 +5,7 @@ import Users from "../pages/Users.js";
 import Account from "../pages/Account.js";
 import Products from "../pages/Products.js";
 import Orders from "../pages/Orders.js";
+import Category from "../pages/Category.js";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <Orders />,
+      },
+      {
+        path: "category",
+        element: <Category />,
       },
     ],
   },
