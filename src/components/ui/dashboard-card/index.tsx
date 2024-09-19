@@ -21,7 +21,7 @@ export const DashboardCard = (props: DashboardCardProps) => {
     >
       <div className="w-full flex justify-between items-center bg-inherit flow-row">
         <div className="bg-inherit flex justify-center items-start flex-col">
-          <h2 className="text-[12px] font-semibold bg-inherit font-DMSans">
+          <h2 className="text-[12px] text-[#25313E] font-semibold bg-inherit font-DMSans">
             {title}
           </h2>
           <p className="bg-inherit text-[12px] font-semibold font-DMSans text-[#8F94A8]">
@@ -30,7 +30,9 @@ export const DashboardCard = (props: DashboardCardProps) => {
         </div>
         <img src={icon} alt="icon" className="w-[24px] bg-inherit  h-[24px]" />
       </div>
-      <h2 className="text-[14px] bg-inherit  font-bold font-DMSans">{value}</h2>
+      <h2 className="text-[14px] bg-inherit text-[#25313E] font-bold font-DMSans">
+        {value}
+      </h2>
       {children && (
         <div
           className={cn("border-t bg-inherit  border-t-themeGrey/20 py-2.5")}

@@ -115,22 +115,22 @@ const Home = () => {
   const [dashboardHeroCards] = useState<DashboardCardProps[]>([
     {
       icon: product,
-      title: "Total Product",
+      title: "Total Revenue",
       value: 0,
     },
     {
       icon: sales,
-      title: "Total Sales",
+      title: "Total Customers",
       value: 3000,
     },
     {
       icon: stock,
-      title: "Stock Left",
+      title: "Total Order",
       value: 0,
     },
     {
       icon: stock,
-      title: "Stock Left",
+      title: "Pending Delivery",
       value: 0,
     },
   ]);

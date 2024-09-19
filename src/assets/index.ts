@@ -13,6 +13,11 @@ import farmer from "./images/farmer.svg";
 import money from "./icons/moneys.svg";
 import pendingorder from "./icons/pendingorder.png";
 import totalsales from "./icons/totalsales.svg";
+import allOrder from "./icons/allOrder.svg";
+import pendingOrder from "./icons/delivery.svg";
+import deliveredOrder from "./icons/deliveredOrder.svg";
+import failedOrder from "./icons/failedOrder.svg";
+import people from "./icons/people.svg";
 import stockleft from "./icons/stockleft.png";
 import copy from "./icons/document-copy.svg";
 import cassava from "./images/cassava.svg";
@@ -37,5 +42,10 @@ export {
   potato,
   pendingorder,
   stockleft,
+  allOrder,
   totalsales,
+  pendingOrder,
+  deliveredOrder,
+  failedOrder,
+  people,
 };
